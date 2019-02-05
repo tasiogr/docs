@@ -933,7 +933,7 @@ Note: `openid` is required for `phone`, `email` or `profile`. Also `openid` is r
     }
     ```
 
-1. Add `myapp://` to your app's URL scemes:
+1. Add `myapp://` to your app's URL schemes:
 
     Right-click Info.plist and then choose Open As > Source Code.
 
@@ -1070,7 +1070,7 @@ This will allow users authenticated via Auth0 have access to your AWS resources.
     }
     ```
 
-1. Add the sigin and signout redirect URIs to your app's URL scemes:
+1. Add the signin and signout redirect URIs to your app's URL scemes:
 
     Right-click Info.plist and then choose Open As > Source Code.
 
