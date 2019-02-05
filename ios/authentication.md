@@ -441,7 +441,7 @@ AWSMobileClient.sharedInstance().signOut()
 
 ### Global SignOut
 
-Using global signout, you can signout a user from all active login sessions.
+Using global signout, you can signout a user from all active login sessions. By doing this, you are revoking all the OIDC tokens(id token, access token and refresh token) which means the user is signed out from all the devices. However, although the tokens are revoked, the AWS credentials will remain valid until they expire (which by default is 1 hour).
 
 ```swift
 AWSMobileClient.sharedInstance().signOut(options: SignOutOptions(signOutGlobally: true)) { (error) in
@@ -559,25 +559,9 @@ AWSMobileClient.sharedInstance().federatedSignIn(providerName: "YOUR_SAML_PROVID
 }
 
 ```
-
-If your SAML assertion tokens contain multiple IAM Role ARNs, you can specify the preferred Role ARN through `FederatedSignInOptions` object:
-
-```swift
-// Specify preferred Role ARN
-let federatedSignInOptions = FederatedSignInOptions(roleARN: "YOUR_SAML_ROLE_ARN")
-
-// Perform SAML token federation
-AWSMobileClient.sharedInstance().federatedSignIn(providerName: "YOUR_SAML_PROVIDER_NAME",
-                                                    token: "YOUR_SAML_TOKEN",
-                                                    federatedSignInOptions: federatedSignInOptions) { (userState, error) in
-    if let error = error as? AWSMobileClientError {
-        print(error.localizedDescription)
-    }
-    if let userState = userState {
-        print("Status: \(userState.rawValue)")
-    }
-}
-```
+**Availability Note**
+Currently, the SAML federation feature only supports SAML assertion tokens which have 1 Role ARN. If the assertion token has more than 1 Role ARN, it will result into an error.
+{: .callout .callout--info}
 
 #### Facebook with Cognito Identity
 
