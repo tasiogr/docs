@@ -151,8 +151,14 @@ Use the following steps to connect your app to the push notification backend ser
 
 	        // Initialize PinpointManager
 	        getPinpointManager(getApplicationContext());
+		pinpointManager.getSessionClient().startSession();
 	    }
-	}
+	    @Override
+    	    protected void onDestroy() {
+		super.onDestroy();
+
+		pinpointManager.getSessionClient().stopSession();
+	    }
 	```
 
 ## Add Amazon Pinpoint Targeted and Campaign Push Messaging
